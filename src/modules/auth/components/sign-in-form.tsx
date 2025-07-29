@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { signInSchema, type SignInSchema } from "../schemas";
-import { simulateLoginApi } from "@/api/auth";
+import { simulateLoginApi } from "../api";
 
 export function SignInForm() {
   const navigate = useNavigate();
@@ -133,13 +133,13 @@ export function SignInForm() {
                 </FormControl>
                 <FormMessage />
                 <div className="mt-1 text-left">
-                  <a
-                    href="/auth/forgot-password"
+                  <Link
+                    to="/auth/forgot-password"
                     className="text-xs text-primary hover:underline"
                     tabIndex={isLoading ? -1 : 0}
                   >
                     هل نسيت كلمة المرور؟
-                  </a>
+                  </Link>
                 </div>
               </FormItem>
             )}
@@ -176,6 +176,17 @@ export function SignInForm() {
           </Button>
         </form>
       </Form>
+
+      <div className="text-center text-sm">
+        <span className="text-muted-foreground">ليس لديك حساب؟ </span>
+        <Link
+          to="/auth/sign-up"
+          className="text-primary hover:underline font-medium"
+        >
+          إنشاء حساب جديد
+        </Link>
+      </div>
+
       <div className="text-center text-xs text-muted-foreground mt-4">
         {`قال رسول الله ﷺ: "من سلك طريقًا يلتمس فيه علمًا سهّل الله له به طريقًا إلى الجنة"`}
       </div>
